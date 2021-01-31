@@ -44,12 +44,12 @@ class InstaBot:
         time.sleep(randrange(1,3))
         """
         self.browser.get('https://www.instagram.com/explore/tags/' + hashtag + '/')
-        time.sleep(randrange(1,4))
+        time.sleep(randrange(2,4))
 
     def like(self, count):
         first_pic = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[1]/div/div/div[1]/div[1]/a/div')
         first_pic.click()
-        time.sleep(randrange(1,4))
+        time.sleep(randrange(2,5))
         for i in range(0, count):
             # like_button = self.browser.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]')
             # like_button.click()
@@ -62,4 +62,4 @@ class InstaBot:
 
             arrow_button = self.browser.find_element_by_class_name("coreSpriteRightPaginationArrow")                                                    
             arrow_button.click()
-            time.sleep(randrange(1,5))
+            time.sleep(randrange(2,5))
