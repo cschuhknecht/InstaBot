@@ -2,6 +2,7 @@ import time
 from random import randrange
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys #für z.B. die Enter Taste
+from bs4 import BeautifulSoup as bs
 
 #browser = webdriver.Chrome('chromedriver.exe')
 #browser.get('https://www.instagram.com/')
@@ -19,7 +20,7 @@ class InstaBot:
 
     def open(self):
         self.browser.get('https://www.instagram.com/')
-        time.sleep(randrange(10,15))
+        time.sleep(randrange(5,10))
         self.accept_cookies()
 
     def login(self):
@@ -50,9 +51,14 @@ class InstaBot:
         first_pic.click()
         time.sleep(randrange(1,4))
         for i in range(0, count):
-            like_button = self.browser.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]')
-            like_button.click()
-            time.sleep(randrange(1,4))
+            # like_button = self.browser.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]')
+            # like_button.click()
+
+            like = self.browser.find_element_by_class_name('fr66n')
+            soup = bs(like.get_attribute('innerHTML'), 'html.parser')
+            if soup.find('svg')['aria-label'] == 'Like':
+                like.click()
+            time.sleep(randrange(1, 4))
 
             arrow_button = self.browser.find_element_by_class_name("coreSpriteRightPaginationArrow")                                                    
             arrow_button.click()
